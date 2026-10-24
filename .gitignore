@@ -1,0 +1,25 @@
+node_modules/
+
+# 打包产物（本地生成，不入库）
+releases/*.tgz
+!releases/.gitkeep
+
+# 私有素材：两段视频不入公开仓库
+lib/assets/*.mp4
+1/
+2/
+
+# 设计与调试中间产物
+_concept/
+_tmp/
+preview/_shots/
+preview/_*.png
+
+# 本机任务留痕
+_开工简报*.md
+_开工简报.历史/
+_素材分析与方案.md
+
+*.log
+.DS_Store
+Thumbs.db

@@ -1,0 +1,7 @@
+# dsh-startup-moss — DSH bundle patch
+#
+# Host 半侧挂进当前 profile；浏览器设置页由 package.json 的 dsh.client 组装。
+# 本包内嵌自用视频，仅作私有安装包使用，不发布到公共 registry。
+- insert:
+    - id: dsh-startup-moss
+      name: dsh-startup-moss

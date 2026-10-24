@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>dsh-startup-moss · 8.8s 预览</title>
+<style>
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#000}
+</style>
+<link id="mossStyle" rel="stylesheet">
+<script>
+(function () {
+  var local = location.protocol === 'file:'
+  var base = local ? '../lib/' : '/dsh-moss/'
+  var assetBase = local ? '../lib/assets/' : '/dsh-moss/asset/'
+  var params = new URLSearchParams(location.search)
+  var t = params.get('t')
+  var fail = params.get('fail')
+
+  document.getElementById('mossStyle').href = base + 'splash.css'
+  window.__DSH_MOSS_ASSET_BASE__ = assetBase
+  window.__DSH_MOSS_VERSION__ = '0.1.1'
+  window.__DSH_MOSS_FACTS__ = {
+    version: '1.6.0',
+    profile: 'DESKTOP',
+    sessions: 4,
+    bundleCount: 12,
+    model: 'deepseek-flash'
+  }
+  window.__DSH_MOSS__ = {
+    enabled: true,
+    mode: 'always',
+    instrumentOpacity: 0.55,
+    whaleOpacity: 0.18,
+    coreShade: 0.62,
+    sound: true,
+    volume: 0.85,
+    allowSkip: false,
+    reducedMotion: false,
+    facts: window.__DSH_MOSS_FACTS__
+  }
+
+  if (t !== null && t !== '' && isFinite(Number(t))) window.__DSH_MOSS_PREVIEW_T__ = Number(t)
+  if (fail) window.__DSH_MOSS_PREVIEW_FAIL__ = fail
+  if (params.get('motion') === '1') window.__DSH_MOSS_FORCE_MOTION__ = true
+  window.__DSH_MOSS_PREVIEW_BASE__ = base
+})()
+</script>
+</head>
+<body>
+<div id="dsh-moss-root"></div>
+<script>
+(function () {
+  var script = document.createElement('script')
+  script.src = (window.__DSH_MOSS_PREVIEW_BASE__ || '/dsh-moss/') + 'splash.js?t=' + Date.now()
+  document.body.appendChild(script)
+})()
+</script>
+</body>
+</html>

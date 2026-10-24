@@ -1,0 +1,57 @@
+{
+  "name": "dsh-startup-moss",
+  "version": "0.1.1",
+  "description": "DeepSeek Harness 启动动画「MOSS CORE 550W」：DSH 大鱼背景、Dune 仪表层、550W 核心与零点击 8.8 秒开幕。",
+  "keywords": [
+    "dsh",
+    "deepseek-harness",
+    "startup",
+    "splash",
+    "cordis",
+    "plugin"
+  ],
+  "homepage": "https://github.com/QIFANAI/dsh-startup-moss#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/QIFANAI/dsh-startup-moss.git"
+  },
+  "bugs": {
+    "url": "https://github.com/QIFANAI/dsh-startup-moss/issues"
+  },
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "preview/index.html",
+    "cordis.patch.yml",
+    "README.md",
+    "INSTALL.md"
+  ],
+  "scripts": {
+    "test": "node test/smoke-host.mjs && node test/smoke-splash.mjs && node test/smoke-client.mjs",
+    "pack": "npm pack --pack-destination releases",
+    "assets": "node scripts/assets.mjs",
+    "assets:check": "node scripts/assets.mjs --check"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-settings"
+      ],
+      "platform": "web"
+    }
+  },
+  "author": "沈宏宏 (QIFANAI)"
+}
