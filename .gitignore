@@ -1,4 +1,5 @@
 node_modules/
+dist/
 
 # 打包产物（本地生成，不入库）
 releases/*.tgz
