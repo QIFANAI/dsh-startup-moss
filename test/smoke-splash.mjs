@@ -244,7 +244,7 @@ ok('preview 只是查看器，不出现重播按钮', () => {
 })
 ok('package.json 名称/版本/入口/bundle 声明正确', () => {
   assert.equal(pkg.name, 'dsh-startup-moss')
-  assert.equal(pkg.version, '0.1.1')
+  assert.equal(pkg.version, '0.1.2')
   assert.equal(pkg.main, 'lib/index.js')
   assert.equal(pkg.license, 'MIT')
   assert.equal(pkg.repository.url, 'git+https://github.com/QIFANAI/dsh-startup-moss.git')
@@ -257,17 +257,17 @@ ok('cordis.patch.yml 有 insert 条目', () => {
   assert.match(yml, /dsh-startup-moss/)
 })
 
-/* ── 素材：公开仓库允许缺失，缺失时必须走程序化兜底 ───────────────────── */
+/* ── 素材：随仓库发布；存在时按素材路径断言，缺失时仍验兜底 ─────────────── */
 ok('lib/assets/whale.svg 存在且体积合理', () => {
   assert.ok(exists('lib/assets/whale.svg'), '缺少 lib/assets/whale.svg')
   assert.ok(fs.statSync(path.join(ROOT, 'lib/assets/whale.svg')).size > 1000)
 })
-for (const [rel, min] of [
-  ['lib/assets/moss-core.mp4', 500 * 1024],
-  ['lib/assets/dune-hud.mp4', 500 * 1024]
+for (const [rel, min, constName] of [
+  ['lib/assets/moss-core.mp4', 500 * 1024, 'CORE_URL'],
+  ['lib/assets/dune-hud.mp4', 500 * 1024, 'DUNE_URL']
 ]) {
   if (!exists(rel)) {
-    ok(rel + ' 缺失时走程序化兜底', () => {
+    ok(rel + ' 缺失时仍走程序化兜底', () => {
       assert.match(splash, /LOCAL FALLBACK \/ SIGNAL DEGRADED/)
       assert.match(css, /moss-fallback-ring/)
     })
@@ -283,10 +283,18 @@ for (const [rel, min] of [
     fs.closeSync(fd)
     assert.ok(head.includes(Buffer.from('ftyp')), '缺少 ftyp box')
   })
+  const name = path.basename(rel)
+  ok(rel + ' 经 Host 素材路由按名读取', () => {
+    assert.ok(splash.includes('var ' + constName + " = ASSET + '" + name + "'"), 'splash.js 未从素材基址拼出 ' + name)
+    assert.ok(host.includes("'" + name + "': 'video/mp4'"), 'Host 素材白名单缺少 ' + name)
+  })
 }
-ok('素材授权边界与导入方式已写进 README', () => {
+ok('素材随仓库发布的声明与替换方式已写进 README', () => {
   const md = read('lib/assets/README.md')
-  assert.match(md, /不入公开仓库/)
+  assert.match(md, /随仓库与官方 Release 完整发布/)
+  assert.match(md, /权利归各自权利人/)
+  assert.match(md, /MIT/)
+  assert.match(md, /Issue/)
   assert.match(md, /npm run assets/)
   assert.match(md, /whale\.svg/)
 })

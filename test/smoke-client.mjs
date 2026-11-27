@@ -428,7 +428,7 @@ const seen = bootSelf({
 await settle()
 check('session 已播 → 不重复创建根节点', seen.document.getElementById('dsh-moss-root') === null)
 
-check('兜底版本与 package.json 一致', PKG.version === '0.1.1', PKG.version)
+check('兜底版本与 package.json 一致', PKG.version === '0.1.2', PKG.version)
 
 console.log('\n============================')
 console.log(`  通过 ${pass} / 失败 ${fail}`)

@@ -2,7 +2,7 @@
 /**
  * 本地素材导入 / 自检。
  *
- * 两段视频不入公开仓库；需要完整视觉效果时，用本脚本把自有素材复制到
+ * 两段视频随仓库与 Release 完整发布；需要替换为自有素材时，用本脚本复制到
  * lib/assets/。缺失时插件仍可运行，会显示程序化仪表环与 550W 文字。
  *
  *   npm run assets -- --core <550W.mp4> --dune <dune-hud.mp4> [--force]
@@ -36,7 +36,7 @@ function printStatus() {
     const detail = present ? (size / 1024 / 1024).toFixed(2) + ' MB' : '缺失（使用程序化兜底）'
     console.log(`${present ? '✓' : '·'} ${item.name}  ${detail}`)
   }
-  console.log('\n完整视觉效果需要两段本地视频；缺失时插件仍可运行，显示程序化仪表环与 550W 文字。')
+  console.log('\n两段视频随仓库发布，可用自有素材替换；缺失时插件仍可运行，显示程序化仪表环与 550W 文字。')
 }
 
 if (checkOnly) {

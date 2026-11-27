@@ -5,8 +5,7 @@ dist/
 releases/*.tgz
 !releases/.gitkeep
 
-# 私有素材：两段视频不入公开仓库
-lib/assets/*.mp4
+# 素材工程原始导出（正式素材已放入 lib/assets，不入库）
 1/
 2/
 
@@ -20,6 +19,10 @@ preview/_*.png
 _开工简报*.md
 _开工简报.历史/
 _素材分析与方案.md
+
+# 本机发布物制作与数据回填
+_video/
+08_metrics.md
 
 *.log
 .DS_Store

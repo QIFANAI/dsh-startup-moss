@@ -43,28 +43,28 @@ git clone https://github.com/QIFANAI/dsh-startup-moss.git
 cd dsh-startup-moss
 ```
 
-### 2. 导入本地素材（可选，但决定是否完整视觉）
+### 2. 素材（已随仓库包含）
 
-仓库不包含两段私有视频，见「素材说明」。准备好自有素材后：
+仓库与官方 Release 已包含完整素材（`lib/assets/moss-core.mp4`、`lib/assets/dune-hud.mp4`），clone 或安装 tgz 后即是完整视觉，无需额外操作。若要替换为自有素材：
 
 ```powershell
-npm run assets -- --core "D:\clips\550w.mp4" --dune "D:\clips\dune-hud.mp4"
+npm run assets -- --core "D:\clips\550w.mp4" --dune "D:\clips\dune-hud.mp4" --force
 npm run assets:check
 ```
 
-不导入也能安装，插件会以程序化仪表环 + 550W 文字兜底运行。
+素材缺失时插件仍可安装运行，会以程序化仪表环 + 550W 文字兜底。
 
 ### 3. 打包并安装
 
 ```powershell
 npm run pack
-dsh plugin --profile desktop add .\releases\dsh-startup-moss-0.1.1.tgz
+dsh plugin --profile desktop add .\releases\dsh-startup-moss-0.1.2.tgz
 ```
 
 没有全局 `dsh` 命令时，使用桌面端 CLI：
 
 ```powershell
-& "<DSH 安装目录>\resources\runtime\cli\bin\dsh.cmd" plugin --profile desktop add .\releases\dsh-startup-moss-0.1.1.tgz
+& "<DSH 安装目录>\resources\runtime\cli\bin\dsh.cmd" plugin --profile desktop add .\releases\dsh-startup-moss-0.1.2.tgz
 ```
 
 安装后重启 DSH。设置页入口：`设置 → MOSS 启动动画`。
@@ -75,11 +75,15 @@ dsh plugin --profile desktop add .\releases\dsh-startup-moss-0.1.1.tgz
 
 ## 素材说明
 
-仓库只保留 `lib/assets/whale.svg`。`moss-core.mp4` 与 `dune-hud.mp4` **不入库、不随公开仓库分发**：前者含 550W 字标，后者取自影视片段，公开再分发需要自行取得授权。
+仓库与官方 Release 完整包含两段视频：`lib/assets/moss-core.mp4`（黑底 550W 字标与信号线，用于核心层）与 `lib/assets/dune-hud.mp4`（仪表环片段，运行时从第 22 秒起取用）。clone 或安装 tgz 后即是完整观感，不需要再导入素材。
 
-`npm run assets` 只做本地文件复制，不上传、不联网。素材授权由使用者自行确认。缺失时运行时自动使用程序化兜底，功能不受影响。
+- **素材随仓库与 Release 完整发布**，权利归各自权利人所有；代码的 MIT 授权**不覆盖**视频素材与 `whale.svg`。
+- 再分发、商用或公开演示前，请自行确认你有权使用；使用者的使用与分发行为由使用者自行负责。
+- 若你是权利人并认为随附发布不当，请开 [Issue](https://github.com/QIFANAI/dsh-startup-moss/issues) 联系维护者处理。
 
-`whale.svg` 是 DSH 品牌标识，仅用于本插件内的品牌引用，不随 MIT 许可证授权。
+`npm run assets` 只做本地文件复制，不上传、不联网，用于把自有素材换入 `lib/assets/`。素材缺失或解码失败时，运行时自动回落到程序化仪表环与 550W 文字，功能不受影响。
+
+`whale.svg` 是 DSH 品牌标识，仅用于本插件内的品牌引用，其权利归 DeepSeek / DSH 权利人所有，不随 MIT 许可证授权。
 
 ## 配置
 
@@ -150,4 +154,6 @@ npm run pack
 
 ## 授权
 
-代码以 [MIT](LICENSE) 发布。素材、商标与第三方作品的授权边界见 [lib/assets/README.md](lib/assets/README.md)。
+代码以 [MIT](LICENSE) 发布。MIT 只覆盖作者原创的代码、文案与样式，**不覆盖** `lib/assets/` 下的视频素材与 `whale.svg`。
+
+素材随仓库与官方 Release 完整发布，权利归各自权利人。再分发、商用或公开演示前请自行确认授权；权利人如认为随附发布不当，可开 [Issue](https://github.com/QIFANAI/dsh-startup-moss/issues) 联系维护者。完整边界见 [lib/assets/README.md](lib/assets/README.md)。

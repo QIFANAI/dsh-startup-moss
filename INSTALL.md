@@ -9,16 +9,16 @@
 | 权限 | 能执行 `dsh plugin`，并能写入 `~/.dsh/profiles/<profile>` |
 | 状态 | 安装前完全退出 DSH |
 
-## 1. 准备素材（可选）
+## 1. 素材（已随仓库包含）
 
-仓库不含两段私有视频。需要完整视觉效果时，用自有素材在本地补齐：
+仓库与官方 Release 已包含完整素材 `lib/assets/moss-core.mp4` 与 `lib/assets/dune-hud.mp4`，克隆或安装 tgz 后即是完整视觉。如需替换为自有素材：
 
 ```powershell
-npm run assets -- --core "<550W.mp4>" --dune "<dune-hud.mp4>"
+npm run assets -- --core "<550W.mp4>" --dune "<dune-hud.mp4>" --force
 npm run assets:check
 ```
 
-不补齐也可以继续，运行时会显示程序化仪表环与 550W 文字。
+素材缺失时也可以继续，运行时会显示程序化仪表环与 550W 文字。
 
 ## 2. 打包
 
@@ -31,13 +31,13 @@ npm run pack
 ## 3. 安装
 
 ```powershell
-dsh plugin --profile desktop add .\releases\dsh-startup-moss-0.1.1.tgz
+dsh plugin --profile desktop add .\releases\dsh-startup-moss-0.1.2.tgz
 ```
 
 没有全局 `dsh` 时：
 
 ```powershell
-& "<DSH 安装目录>\resources\runtime\cli\bin\dsh.cmd" plugin --profile desktop add .\releases\dsh-startup-moss-0.1.1.tgz
+& "<DSH 安装目录>\resources\runtime\cli\bin\dsh.cmd" plugin --profile desktop add .\releases\dsh-startup-moss-0.1.2.tgz
 ```
 
 安装后重启 DSH。配置在 `~/.dsh/dsh-startup-moss.json`；设置页入口为 `设置 → MOSS 启动动画`。
